@@ -6,9 +6,19 @@ using UnityEngine;
 public class MainMenu : MonoBehaviourPunCallbacks
 {
     private bool isConnecting = false;
+
+    public GameObject Panel_NameImput;
+    public GameObject Panel_Waiting;
+
     //private const string GameVersion = "0.1";
     //private const int MaxPlayersPerRoom = 2;
 
+    void Start()
+    {
+        Panel_NameImput.SetActive(true);
+        Panel_Waiting.SetActive(false);
+
+    }
     private void Awake()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
@@ -21,6 +31,8 @@ public class MainMenu : MonoBehaviourPunCallbacks
         if (!(PhotonNetwork.IsConnected))
         {
             PhotonNetwork.ConnectUsingSettings();
+            Panel_NameImput.SetActive(false);
+            Panel_Waiting.SetActive(true);
         }
     }
 
